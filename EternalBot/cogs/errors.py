@@ -6,10 +6,7 @@ class Errors(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, discord.ext.commands.NotOwner):
-            await ctx.send("This command is owner only.")
+
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -30,6 +27,9 @@ class Errors(commands.Cog):
                     if max(ratio) < matcherNr:
                         ratio.clear(); suggestion.clear(); suggestion.append(command); ratio.append(matcherNr)
             return await ctx.send(f'Command not found. Were you looking for: `{suggestion[0]}`?')
+
+	if isinstance(error, discord.ext.commands.NotOwner):
+            await ctx.send("This command is owner only.")
 
 
 def setup(bot):
